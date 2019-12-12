@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+
+  # --- public artifacts bucket
+
+  AmazonLinuxSwiftBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      AccessControl: Private
+      BucketName: amazonlinux-swift
+
+  # --- 
+
+  # PipelineServiceRole:
+  #   Type: "AWS::IAM::Role"
+  #   Properties:
+  #     AssumeRolePolicyDocument:
+  #       Version: "2012-10-17"
+  #       Statement:
+  #       - Effect: "Allow"
+  #         Principal:
+  #           Service:
+  #           - "codepipeline.amazonaws.com"
+  #         Action:
+  #         - "sts:AssumeRole"
+  #     Path: "/"
+  #     Policies:
+  #     - PolicyName: "codepipelinePolicy"
+  #       PolicyDocument:
+  #         Version: "2012-10-17"
+  #         Statement:
+  #         - Effect: "Allow"
+  #           Action:
+  #           - "s3:*"
+  #           - "lambda:*"
+  #           Resource: "*"
+  #         - Effect: "Allow"
+  #           Action:
+  #           - "lambda:InvokeFunction"
+  #           - "lambda:ListFunctions"
+  #           Resource: "*"
+
+  # Pipeline:
+  #   Type: "AWS::CodePipeline::Pipeline"
+  #   Properties:
+  #     RoleArn: !Ref PipelineServiceRoleArn
+  #     Stages:
+  #     - Name: Source
+  #       Actions:
+  #       - Name: LoadTemplateFromS3
+  #         ActionTypeId:
+  #           Category: Source
+  #           Owner: AWS
+  #           Version: 1
+  #           Provider: S3
+  #         OutputArtifacts:
+  #           - Name: SourceOutput
+  #         Configuration:
+  #           S3Bucket: !Ref SourceS3Bucket
+  #           S3ObjectKey: 404-service/404-service.zip
+  #         RunOrder: 1
+  #       - Name: Staging
+  #         Actions:
+  #         - Name: CreateStagingStack
+  #           InputArtifacts:
+  #           - Name: SourceOutput
+  #           ActionTypeId:
+  #             Category: Deploy
+  #             Owner: AWS
+  #             Version: 1
+  #             Provider: CloudFormation
+  #           Configuration:
+  #             ActionMode: CREATE_UPDATE # or REPLACE_ON_FAILURE during testing
+  #             StackName: ApoSync404ServiceStagingStack
+  #             TemplateConfiguration: "SourceOutput::stagingConfig.json"
+  #             TemplatePath: "SourceOutput::cloudformation.yml"
+  #             Capabilities: CAPABILITY_IAM
+  #             RoleArn: !GetAtt Pipeline404ServiceRole.Arn
+  #           RunOrder: 1
