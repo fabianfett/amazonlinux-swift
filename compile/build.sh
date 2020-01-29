@@ -20,6 +20,3 @@ else
     | tar --delete --wildcards -f - 'usr/lib/python2.7' \
     | pigz > ${SWIFT_TAG}-amazonlinux2.tar.gz
 fi
-
-# upload to s3
-aws s3 cp ./${SWIFT_TAG}-amazonlinux2.tar.gz s3://amazonlinux-swift/releases/${SWIFT_TAG}-amazonlinux2.tar.gz
