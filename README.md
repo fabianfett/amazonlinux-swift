@@ -9,7 +9,7 @@ This project creates three build artifacts for every Swift release:
 
 1. An installable Swift binary
 2. A Docker image that runs Swift based off the amazonlinux image
-3. A Swift layer to run Swift natively on AWS Lambda
+3. A Swift layer to run Swift natively on AWS Lambda. A perfect fit for my [`Lambda Runtime`](https://github.com/fabianfett/swift-lambda-runtime)
 
 You can download the binaries at:
 https://fabianfett.de/amazonlinux-swift
