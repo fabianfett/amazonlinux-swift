@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SWIFT_TAG="swift-5.1.3-RELEASE"
+SWIFT_TAG="swift-5.1.4-RELEASE"
 
 # setup image for compilation
 docker build --build-arg SWIFT_TAG=${SWIFT_TAG}  -t compileimage .
