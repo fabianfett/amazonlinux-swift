@@ -9,7 +9,7 @@ RUN groupadd -g 999 ec2-user && \
 
 WORKDIR /home/ec2-user
 
-ARG SWIFT_TAG="swift-5.1.4-RELEASE"
+ARG SWIFT_TAG="swift-5.2-branch"
 
 # The build needs a package from the EPEL repo so that needs to be enabled.
 # https://www.tecmint.com/install-epel-repository-on-centos/
@@ -50,6 +50,6 @@ WORKDIR /home/ec2-user/swift
 RUN ./utils/update-checkout --clone --tag ${SWIFT_TAG}
 
 # Add skip-test-foundation to buildbot_linux preset
-RUN sed -i '786 a skip-test-foundation' utils/build-presets.ini
+RUN sed -i '785 a skip-test-foundation' utils/build-presets.ini
 
 CMD /home/ec2-user/swift/utils/build-script --preset=buildbot_linux installable_package=/home/ec2-user/swift-package.tar.gz install_destdir=/tmp/swift
