@@ -4,8 +4,8 @@ FROM amazonlinux:2
 RUN yum -y update && yum install shadow-utils.x86_64 -y 
 
 # add a new group and user
-RUN groupadd -g 999 ec2-user && \  
-    useradd -m -r -u 999 -g ec2-user ec2-user 
+RUN groupadd -g 127 ec2-user && \  
+    useradd -m -r -u 127 -g ec2-user ec2-user 
 
 WORKDIR /home/ec2-user
 
@@ -19,24 +19,19 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
 RUN yum -y update
 RUN yum -y group install "development tools"
 RUN yum -y install \
-      git cmake clang python swig uuid-devel libicu-devel libedit-devel \
+      git clang python swig uuid-devel libicu-devel libedit-devel \
       libxml2-devel sqlite-devel ncurses-devel pkgconfig python-devel \
       python-pkgconfig libbsd-devel libuuid-devel pexpect curl-devel \
       tzdata rsync wget which procps
 
 # Grab an updated version of cmake
-RUN wget https://cmake.org/files/v3.15/cmake-3.15.5-Linux-x86_64.tar.gz \
-      && tar xvzf cmake-3.15.5-Linux-x86_64.tar.gz \
-      && rm cmake-3.15.5-Linux-x86_64.tar.gz
+RUN wget -qO- "https://cmake.org/files/v3.16/cmake-3.16.3-Linux-x86_64.tar.gz" \
+      | tar --strip-components=1 -xz -C /usr/local
 
 USER ec2-user
 
 # Add updated version of cmake to path 
-ENV PATH="/home/ec2-user/cmake-3.15.5-Linux-x86_64/bin/:${PATH}"
-
-# Cloning ninja into the root build area will cause it to be built by
-# the build script and used instead of having to install a binary version
-RUN git clone https://github.com/ninja-build/ninja.git
+ENV PATH="/usr/local/bin/:${PATH}"
 
 # Create sym link because of stupid lib64/python
 RUN mkdir -p build \
@@ -47,7 +42,7 @@ RUN mkdir -p build \
 # Bootstrap the swift source and do a full checkout
 RUN git clone --branch ${SWIFT_TAG} https://github.com/apple/swift.git
 WORKDIR /home/ec2-user/swift
-RUN ./utils/update-checkout --clone --tag ${SWIFT_TAG}
+RUN ./utils/update-checkout --clone --scheme ${SWIFT_TAG}
 
 # Add skip-test-foundation to buildbot_linux preset
 RUN sed -i '785 a skip-test-foundation' utils/build-presets.ini
