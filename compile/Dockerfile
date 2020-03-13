@@ -2,7 +2,7 @@ FROM amazonlinux:2
 
 WORKDIR /home/ec2-user
 
-ARG SWIFT_TAG="swift-5.1.3-RELEASE"
+ARG SWIFT_TAG="swift-5.1.5-RELEASE"
 
 # The build needs a package from the EPEL repo so that needs to be enabled.
 # https://www.tecmint.com/install-epel-repository-on-centos/
@@ -24,7 +24,6 @@ RUN wget https://cmake.org/files/v3.15/cmake-3.15.5-Linux-x86_64.tar.gz \
 
 # Add updated version of cmake to path 
 ENV PATH="/home/ec2-user/cmake-3.15.5-Linux-x86_64/bin/:${PATH}"
-ENV LLVM_LIBDIR_SUFFIX="64"
 
 # Cloning ninja into the root build area will cause it to be built by
 # the build script and used instead of having to install a binary version

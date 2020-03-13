@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SWIFT_TAG="swift-5.1.4-RELEASE"
+SWIFT_TAG="swift-5.1.5-RELEASE"
 
 REGIONS=$(aws ssm get-parameters-by-path \
   --path /aws/service/global-infrastructure/services/lambda/regions \
