@@ -1,6 +1,6 @@
 FROM amazonlinux:2
 
-ARG SWIFT_TAG="swift-5.1.5-RELEASE"
+ARG SWIFT_TAG="swift-5.2-RELEASE"
 
 RUN yum -y update && \
   yum -y install libatomic libedit gcc git

@@ -1,4 +1,4 @@
-SWIFT_DOCKER_IMAGE=fabianfett/amazonlinux-swift:5.1.5-amazonlinux2
+SWIFT_DOCKER_IMAGE=fabianfett/amazonlinux-swift:5.2-amazonlinux2
 
 LAYER_FOLDER=swift-lambda-runtime
 LAYER_ZIP=$(LAYER_FOLDER).zip
@@ -18,9 +18,9 @@ create_layer: clean_layer
 					/usr/lib/swift/linux/libFoundationNetworking.so \
 					/usr/lib/swift/linux/libFoundationXML.so \
 					/usr/lib/swift/linux/libdispatch.so \
-					/usr/lib/swift/linux/libicudataswift.so.61 \
-					/usr/lib/swift/linux/libicui18nswift.so.61 \
-					/usr/lib/swift/linux/libicuucswift.so.61 \
+					/usr/lib/swift/linux/libicudataswift.so.65 \
+					/usr/lib/swift/linux/libicui18nswift.so.65 \
+					/usr/lib/swift/linux/libicuucswift.so.65 \
 					/usr/lib/swift/linux/libswiftCore.so \
 					/usr/lib/swift/linux/libswiftDispatch.so \
 					/usr/lib/swift/linux/libswiftGlibc.so \
