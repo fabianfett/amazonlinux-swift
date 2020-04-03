@@ -2,7 +2,7 @@ FROM amazonlinux:2
 
 WORKDIR /home/ec2-user
 
-ARG SWIFT_TAG="swift-5.2-RELEASE"
+ARG SWIFT_TAG="swift-5.2.1-RELEASE"
 
 # The build needs a package from the EPEL repo so that needs to be enabled.
 # https://www.tecmint.com/install-epel-repository-on-centos/

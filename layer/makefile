@@ -1,4 +1,4 @@
-SWIFT_DOCKER_IMAGE=fabianfett/amazonlinux-swift:5.2-amazonlinux2
+SWIFT_DOCKER_IMAGE=fabianfett/amazonlinux-swift:5.2.1-amazonlinux2
 
 LAYER_FOLDER=swift-lambda-runtime
 LAYER_ZIP=$(LAYER_FOLDER).zip
