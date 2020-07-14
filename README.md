@@ -1,5 +1,7 @@
 # amazonlinux-swift
 
+⚠️ With Swift now officially supporting Amazon Linux 2 this project is not updated anymore. It remains here only for documentation purposes.
+
 Apple does not build Swift for any other Linux distribution besides
 Ubuntu. Therefore it is in the hands of the community to bring Swift
 to other distributons. This project wants to support Swift on the 
